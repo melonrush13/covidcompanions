@@ -1,0 +1,9 @@
+{
+	"name": "meldevadf",
+	"location": "centralus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "04fa2b4b-df8d-4112-a3d1-05f8264a0a3b",
+		"tenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+	}
+}
