@@ -1,6 +1,10 @@
 {
-	"name": "RestResource1",
+	"name": "RestResource",
 	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Pet Finder",
+			"type": "LinkedServiceReference"
+		},
 		"annotations": [],
 		"type": "RestResource",
 		"schema": []
