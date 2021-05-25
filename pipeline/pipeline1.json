@@ -17,6 +17,9 @@
 				"typeProperties": {
 					"url": "https://login.microsoftonline.com/microsoft.onmicrosoft.com/oauth2/token",
 					"method": "POST",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
 					"body": "grant_type=client_credentials&client_id=3smaXsGCUFDcq59OdjGacDyuyfhXHvJB2KZrvnrYRc8pUklw3o&client_secret=Sh5CSgbwxeqR21KTIsUEkI1esXOgDBJSGTygUj9y"
 				}
 			}
