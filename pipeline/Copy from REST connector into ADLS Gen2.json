@@ -50,18 +50,8 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "SinkDataset",
-						"type": "DatasetReference",
-						"parameters": {
-							"Container": {
-								"value": "@pipeline().parameters.SinkContainer",
-								"type": "Expression"
-							},
-							"Directory": {
-								"value": "@pipeline().parameters.SinkDirectory",
-								"type": "Expression"
-							}
-						}
+						"referenceName": "SinkData",
+						"type": "DatasetReference"
 					}
 				]
 			},
