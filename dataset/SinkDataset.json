@@ -3,7 +3,7 @@
 	"properties": {
 		"description": "Connection to your Azure Data Lake Store",
 		"linkedServiceName": {
-			"referenceName": "ADLS",
+			"referenceName": "LS_ADLS",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
