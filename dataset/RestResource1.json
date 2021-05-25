@@ -1,0 +1,13 @@
+{
+	"name": "RestResource1",
+	"properties": {
+		"description": "Connection to your REST/HTTP",
+		"linkedServiceName": {
+			"referenceName": "PetFinder API",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
