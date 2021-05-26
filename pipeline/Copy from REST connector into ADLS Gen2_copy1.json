@@ -18,8 +18,8 @@
 					"timeout": "7.00:00:00",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
+					"secureOutput": true,
+					"secureInput": true
 				},
 				"userProperties": [
 					{
@@ -37,7 +37,10 @@
 					"headers": {
 						"Content-Type": "application/x-www-form-urlencoded"
 					},
-					"body": "@activity('getSecrets').output.value"
+					"body": {
+						"value": "@activity('getSecrets').output.value",
+						"type": "Expression"
+					}
 				}
 			},
 			{
@@ -49,8 +52,8 @@
 					"timeout": "7.00:00:00",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
+					"secureOutput": true,
+					"secureInput": true
 				},
 				"userProperties": [],
 				"typeProperties": {
@@ -78,7 +81,7 @@
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
 					"secureOutput": false,
-					"secureInput": false
+					"secureInput": true
 				},
 				"userProperties": [],
 				"typeProperties": {
@@ -88,7 +91,10 @@
 						"requestInterval": "00.00:00:00.010",
 						"requestMethod": "GET",
 						"additionalHeaders": {
-							"Authorization": "@concat('Bearer ',activity('GetBearerToken').output.access_token)"
+							"Authorization": {
+								"value": "@concat('Bearer ',activity('GetBearerToken').output.access_token)",
+								"type": "Expression"
+							}
 						}
 					},
 					"sink": {
