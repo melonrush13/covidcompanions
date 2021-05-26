@@ -30,7 +30,7 @@
 					"headers": {
 						"Content-Type": "application/x-www-form-urlencoded"
 					},
-					"body": "grant_type=client_credentials&client_id=@activity('getKey').output.value&client_secret=Sh5CSgbwxeqR21KTIsUEkI1esXOgDBJSGTygUj9y",
+					"body": "@activity('getSecrets').output.value",
 					"authentication": {
 						"type": "ClientCertificate",
 						"pfx": {
@@ -53,7 +53,7 @@
 				}
 			},
 			{
-				"name": "getKey",
+				"name": "getSecrets",
 				"type": "WebActivity",
 				"dependsOn": [],
 				"policy": {
