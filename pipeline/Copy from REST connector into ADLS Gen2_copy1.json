@@ -4,7 +4,7 @@
 		"activities": [
 			{
 				"name": "GetBearerToken",
-				"description": "Use this Web activity to get bearer token",
+				"description": "Use this Web activity to get bearer token from the Petfinder API based on the secrets from keyvault",
 				"type": "WebActivity",
 				"dependsOn": [
 					{
@@ -42,6 +42,7 @@
 			},
 			{
 				"name": "getSecrets",
+				"description": "Retrieves the keyvault secret which stores the client id and secret for the petfinder API",
 				"type": "WebActivity",
 				"dependsOn": [],
 				"policy": {
@@ -60,6 +61,59 @@
 						"resource": "https://vault.azure.net"
 					}
 				}
+			},
+			{
+				"name": "CopyData",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "GetBearerToken",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "RestSource",
+						"httpRequestTimeout": "00:01:40",
+						"requestInterval": "00.00:00:00.010",
+						"requestMethod": "GET",
+						"additionalHeaders": {
+							"Authorization": "@concat('Bearer ',activity('GetBearerToken').output.access_token)"
+						}
+					},
+					"sink": {
+						"type": "JsonSink",
+						"storeSettings": {
+							"type": "AzureBlobFSWriteSettings"
+						},
+						"formatSettings": {
+							"type": "JsonWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "RestResource",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "SinkData",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"parameters": {
