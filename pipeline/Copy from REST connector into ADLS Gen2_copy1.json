@@ -1,0 +1,87 @@
+{
+	"name": "Copy from REST connector into ADLS Gen2_copy1",
+	"properties": {
+		"activities": [
+			{
+				"name": "GetBearerToken",
+				"description": "Use this Web activity to get bearer token",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": true,
+					"secureInput": true
+				},
+				"userProperties": [
+					{
+						"name": "apiKey",
+						"value": "3smaXsGCUFDcq59OdjGacDyuyfhXHvJB2KZrvnrYRc8pUklw3o"
+					},
+					{
+						"name": "secret",
+						"value": "Sh5CSgbwxeqR21KTIsUEkI1esXOgDBJSGTygUj9y"
+					}
+				],
+				"typeProperties": {
+					"url": "https://api.petfinder.com/v2/oauth2/token",
+					"method": "POST",
+					"headers": {
+						"Content-Type": "application/x-www-form-urlencoded"
+					},
+					"body": "grant_type=client_credentials&client_id=@activity('getKey').output.value&client_secret=Sh5CSgbwxeqR21KTIsUEkI1esXOgDBJSGTygUj9y",
+					"authentication": {
+						"type": "ClientCertificate",
+						"pfx": {
+							"type": "AzureKeyVaultSecret",
+							"store": {
+								"referenceName": "AzureKeyVault",
+								"type": "LinkedServiceReference"
+							},
+							"secretName": "apikey"
+						},
+						"password": {
+							"type": "AzureKeyVaultSecret",
+							"store": {
+								"referenceName": "AzureKeyVault",
+								"type": "LinkedServiceReference"
+							},
+							"secretName": "apisecret"
+						}
+					}
+				}
+			},
+			{
+				"name": "getKey",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"url": "https://meldevkeyvault.vault.azure.net/secrets/pfSecret/be75480845e14547b2da9dfd496d3206?api-version=7.0",
+					"method": "GET",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://vault.azure.net"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"SinkContainer": {
+				"type": "string"
+			},
+			"SinkDirectory": {
+				"type": "string"
+			}
+		},
+		"annotations": []
+	}
+}
