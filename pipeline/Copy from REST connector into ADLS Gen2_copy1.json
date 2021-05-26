@@ -6,13 +6,20 @@
 				"name": "GetBearerToken",
 				"description": "Use this Web activity to get bearer token",
 				"type": "WebActivity",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "getSecrets",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "7.00:00:00",
 					"retry": 0,
 					"retryIntervalInSeconds": 30,
-					"secureOutput": true,
-					"secureInput": true
+					"secureOutput": false,
+					"secureInput": false
 				},
 				"userProperties": [
 					{
@@ -30,26 +37,7 @@
 					"headers": {
 						"Content-Type": "application/x-www-form-urlencoded"
 					},
-					"body": "@activity('getSecrets').output.value",
-					"authentication": {
-						"type": "ClientCertificate",
-						"pfx": {
-							"type": "AzureKeyVaultSecret",
-							"store": {
-								"referenceName": "AzureKeyVault",
-								"type": "LinkedServiceReference"
-							},
-							"secretName": "apikey"
-						},
-						"password": {
-							"type": "AzureKeyVaultSecret",
-							"store": {
-								"referenceName": "AzureKeyVault",
-								"type": "LinkedServiceReference"
-							},
-							"secretName": "apisecret"
-						}
-					}
+					"body": "@activity('getSecrets').output.value"
 				}
 			},
 			{
